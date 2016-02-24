@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo App - Settings</title>
+
+    <link rel="stylesheet" href="settings.css">
+
+    <script src="/node_modules/react/dist/react-with-addons.js"></script>
+    <script src="/node_modules/requirejs/require.js"></script>
+    <script src="/config.requirejs.js"></script>
+</head>
+<body>
+
+<section id="main-tabs" wix-ctrl="Tabs" wix-options="{defaultValue:'tab1'}" class="tabs top" style="margin: 0px">
+    <ul class="tab-header">
+    </ul>
+    <section class="tab-content">
+    </section>
+</section>
+
+<script>
+    require(['Wix', 'UI', '$', '_', 'settings/pages/pages'], function (Wix, UI, $, _, pages) {
+        'use strict';
+        var $tabs = $('#main-tabs');
+        var $tabHeader = $tabs.find('.tab-header');
+        var $tabContent = $tabs.find('.tab-content');
+
+        _.forEach(pages, function (page, index) {
+            $tabHeader.append('<li class="tab-label" data-tab="tab' + index + '">' + page.label + '</li>');
+            $tabContent.append(page.content.wrap('<div style="height: 300px" data-tab="tab' + index + '" class="tab"></div>'));
+        });
+
+        Wix.UI.initialize();
+    });
+</script>
+</body>
+</html>

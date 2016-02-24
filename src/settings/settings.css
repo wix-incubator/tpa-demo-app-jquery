@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/* colors */
+/* sizes */
+.main-tab {
+  text-align: center; }
+  .main-tab .app-logo {
+    background-color: #78C7F6;
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    margin: 20px auto;
+    position: relative; }
+    .main-tab .app-logo:after {
+      content: 'A';
+      color: #FFFFFF;
+      font-size: 30px;
+      line-height: 60px; }
+    .main-tab .app-logo:before {
+      /* inner circle */
+      content: '';
+      position: absolute;
+      box-sizing: border-box;
+      top: 3px;
+      left: 3px;
+      height: 54px;
+      width: 54px;
+      border-radius: 27px;
+      border: 1px dashed white; }
+  .main-tab .app-description {
+    text-align: center;
+    padding: 0 24px;
+    line-height: 20px;
+    font-size: 13px;
+    color: #2b5672; }
+  .main-tab .main-cta-btn {
+    width: 190px; }
+
+/* colors */
+/* sizes */
+.support-tab .developer-info {
+  font-size: 13px;
+  padding: 24px; }
+  .support-tab .developer-info li {
+    color: #3899ec;
+    line-height: 28px;
+    height: 28px; }
+    .support-tab .developer-info li svg {
+      position: relative;
+      top: 4px;
+      padding-right: 7px; }
+
+.support-tab .review-paragraph {
+  text-align: center;
+  padding: 0 24px;
+  line-height: 20px;
+  font-size: 13px;
+  color: #2b5672; }
+
+.support-tab .rate-us-btn {
+  width: 190px; }
+
+body {
+  font-family: HelveticaNeueW01-45Ligh, HelveticaNeueW02-45Ligh, HelveticaNeueW10-45Ligh, Helvetica Neue, Helvetica, Arial, メイリオ, meiryo, ヒラギノ角ゴ pro w3, hiragino kaku gothic pro, sans-serif; }

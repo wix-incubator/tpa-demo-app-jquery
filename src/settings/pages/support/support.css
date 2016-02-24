@@ -1,0 +1,23 @@
+/* colors */
+/* sizes */
+.support-tab .developer-info {
+  font-size: 13px;
+  padding: 24px; }
+  .support-tab .developer-info li {
+    color: #3899ec;
+    line-height: 28px;
+    height: 28px; }
+    .support-tab .developer-info li svg {
+      position: relative;
+      top: 4px;
+      padding-right: 7px; }
+
+.support-tab .review-paragraph {
+  text-align: center;
+  padding: 0 24px;
+  line-height: 20px;
+  font-size: 13px;
+  color: #2b5672; }
+
+.support-tab .rate-us-btn {
+  width: 190px; }

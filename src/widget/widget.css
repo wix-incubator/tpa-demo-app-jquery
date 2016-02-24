@@ -1,0 +1,23 @@
+.wix-style-sample {
+  border: 1px solid #aaa;
+  padding: 15px; }
+  .wix-style-sample h3, .wix-style-sample p {
+    margin: 0;
+    padding: 0; }
+  .wix-style-sample .sample-element {
+    margin: 5px 0; }
+  .wix-style-sample .sample-button {
+    padding: 10px 15px;
+    border: 0; }
+  .wix-style-sample .sample-input {
+    padding: 10px 15px;
+    border: 2px solid #eee; }
+  .wix-style-sample .form {
+    display: block;
+    margin-top: 10px; }
+
+.settings-update pre {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 4px; }
