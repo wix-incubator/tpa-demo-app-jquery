@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="widget.css"/>
 
-    <script src="/node_modules/react/dist/react-with-addons.js"></script>
     <script src="/node_modules/requirejs/require.js"></script>
     <script src="/config.requirejs.js"></script>
 
@@ -37,10 +36,11 @@
 <div id="root"></div>
 
 <script>
-    require(['React', 'jquery', 'widget/widget'], function (React, $, widget) {
+    require(['jquery', 'widget/widget'], function ($, Widget) {
         'use strict';
         $(document).ready(function () {
-            React.render(React.createElement(widget), $('#root').get(0));
+            var comp = new Widget($('#root'));
+            comp.render();
         });
     });
 </script>

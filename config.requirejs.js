@@ -1,13 +1,14 @@
 /*eslint-disable */
 requirejs.config({
-    baseUrl: '/src',
+    baseUrl: '/dist',
     paths: {
         text: '/node_modules/text/text',
         lodash: '/node_modules/lodash/index',
         jquery: '/node_modules/jquery/dist/jquery',
         React: '/node_modules/react/dist/react-with-addons',
-        'Wix': '/lib/Wix-sdk/Wix',
-        'UI': '/lib/editor-ui-lib/ui-lib-jquery'
+        mustache: '/node_modules/mustache/mustache',
+        Wix: '/lib/Wix-sdk/Wix',
+        UI: '/lib/editor-ui-lib/ui-lib-jquery'
     },
     map: {
         '*': {
