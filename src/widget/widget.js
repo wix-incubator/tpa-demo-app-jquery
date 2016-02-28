@@ -24,18 +24,18 @@ define(['jquery', 'Wix', 'mustache'], function ($, Wix, mustache) {
             });*/
 
             this.initialized = true;
-        };
+        }
 
         onSettingsUpdate(update) {
             this.settingsUpdate = update;
             this.render()
                 .then(() => this.updateCompHeight());
-        };
+        }
 
         updateCompHeight(height) {
             const desiredHeight = height || document.documentElement.scrollHeight;
             Wix.setHeight(desiredHeight);
-        };
+        }
 
         stringify(input) {
             try {
@@ -43,7 +43,7 @@ define(['jquery', 'Wix', 'mustache'], function ($, Wix, mustache) {
             } catch (err) {
                 return input;
             }
-        };
+        }
 
         loadTemplate() {
             if (this.template) {
@@ -61,6 +61,6 @@ define(['jquery', 'Wix', 'mustache'], function ($, Wix, mustache) {
             return this.loadTemplate().then(template => {
                 this.element.html(mustache.render(template, {settingsUpdate: this.stringify(this.settingsUpdate)}));
             });
-        };
+        }
     }
 });
