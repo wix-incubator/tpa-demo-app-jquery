@@ -11,27 +11,15 @@
     <script src="/config.requirejs.js"></script>
 </head>
 <body>
-
-<section id="main-tabs" wix-ctrl="Tabs" wix-options="{defaultValue:'tab0', className: 'verticalTabs settings-panel'}" class="tabs verticalTabs" style="margin: 0px; height: 1000px">
-    <ul class="tab-header">
-    </ul>
-    <section class="tab-content">
-    </section>
-</section>
+<div id="root"></div>
 
 <script>
-    require(['Wix', 'UI', '$', '_', 'settings/pages/pages'], function (Wix, UI, $, _, pages) {
+    require(['jquery', 'settings/settings'], function ($, Settings) {
         'use strict';
-        var $tabs = $('#main-tabs');
-        var $tabHeader = $tabs.find('.tab-header');
-        var $tabContent = $tabs.find('.tab-content');
-
-        _.forEach(pages, function (page, index) {
-            $tabHeader.append('<li class="tab-label" data-tab="tab' + index + '">' + page.label + '</li>');
-            $tabContent.append(page.content.wrap('<div style="height: 300px" data-tab="tab' + index + '" class="tab"></div>'));
+        $(document).ready(function () {
+            var comp = new Settings($('#root'));
+            comp.render();
         });
-
-        Wix.UI.initialize();
     });
 </script>
 </body>

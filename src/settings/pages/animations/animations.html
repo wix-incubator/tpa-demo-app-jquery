@@ -1,33 +1,66 @@
-<div class="animations-tab">
-    <div id="dropDown"
+<div>
+    <div class="animations_type"
          wix-ctrl="DropDown"
          wix-options="{
-            title: 'Select option',
+            title: 'Animation',
+            defaultValue: 'slide',
             options: [
-                {defaultValue: '1', label: 'Show Images'},
-                {value: '2', label: 'Hide Images'},
-                {value:'3', label: 'Show Images on Hover'}
-            ]
-        }"
-        wix-param="dropDownValue">
+                { value: 'slide', label: 'Slide'},
+                { value: 'fade', label: 'Fade'},
+                { value: 'other', label: 'Something else'}
+            ]}">
     </div>
 
     <div wix-ctrl="SectionDividerLabeled"
-         wix-options="{
-            label: 'section divider',
-            infoTitle: 'title',
-            infoText: 'info text'
-        }">
+         wix-options="{label: 'Animation settings'}">
     </div>
 
     <div class="button-wrapper-center">
-        <div wix-ctrl="Button"
-             id="play-animation-btn"
+        <div class="animations_button"
+             wix-ctrl="Button"
              wix-options="{
                 label: 'Play Animation',
                 icon: 'calendar'
-            }">
+             }">
         </div>
     </div>
 
+    <hr class="divider-long">
+
+    <div class="animations_direction"
+         wix-ctrl="DropDown"
+         wix-options="{
+            title: 'Direction',
+            defaultValue: 'right',
+            options: [
+                { value: 'top', label: 'From Top'},
+                { value: 'right', label: 'From Right'},
+                { value: 'bottom', label: 'From Bottom'},
+                { value: 'left', label: 'From Left'}
+            ]}">
+    </div>
+
+    <hr class="divider-long">
+
+    <div class="animations_delay"
+         wix-ctrl="Slider"
+         wix-options="{
+            title: 'Delay (secs)',
+            min: 0,
+            max: 2,
+            defaultValue: 0.6
+         }">
+    </div>
+
+    <hr class="divider-long">
+
+    <div>
+        <div class="animations_oppositeEffect"
+             wix-ctrl="Toggle"
+             wix-options="{
+                label: 'Opposite effect',
+                defaultValue: true
+             }">
+        </div>
+    </div>
 </div>

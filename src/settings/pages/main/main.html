@@ -1,5 +1,3 @@
-<rt-require dependency="UI" as="UI"/>
-
 <div class="main-tab">
     <div class="app-logo"></div>
     <p class="app-description">
@@ -7,5 +5,10 @@
         Please add a short description of you App + CTA for the main action.
     </p>
 
-    <UI.button class="main-cta-btn" label="Main CTA" onClick="()=>this.onClick()"></UI.button>
+        <div class="main-cta-btn"
+             wix-ctrl="Button"
+             wix-options="{
+                label: 'Main CTA',
+             }">
+        </div>
 </div>

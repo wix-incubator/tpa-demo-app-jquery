@@ -59,7 +59,7 @@ define(['jquery', 'Wix', 'mustache'], function ($, Wix, mustache) {
             }
 
             return this.loadTemplate().then(template => {
-                this.element.html(mustache.render(template, {settingsUpdate: this.stringify(this.settingsUpdate)}));
+                return this.element.html(mustache.render(template, {settingsUpdate: this.stringify(this.settingsUpdate)}));
             });
         }
     }
