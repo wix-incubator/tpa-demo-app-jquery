@@ -25,7 +25,6 @@ define(['$', 'lodash'], function ($, _) {
             } else {
                 sendButton.disable();
             }
-
         }
 
         sendSupportForm() {
