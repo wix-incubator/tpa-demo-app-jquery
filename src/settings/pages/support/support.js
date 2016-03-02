@@ -7,8 +7,7 @@ define(['$', 'lodash'], function ($, _) {
         }
 
         attachListeners() {
-            this.element.find('.rate-us-btn').getCtrl().onClick(() => console.log('Thanks for rating us, you rock!'));
-
+            this.element.find('.support_rateUs').getCtrl().onClick(() => console.log('Thanks for rating us, you rock!'));
             this.element.find('.support_email').getCtrl().onChange(() => this.updateSupportFormState());
             this.element.find('.support_message').getCtrl().onChange(() => this.updateSupportFormState());
             this.element.find('.support_sendButton').getCtrl().onClick(() => this.sendSupportForm());
@@ -19,8 +18,14 @@ define(['$', 'lodash'], function ($, _) {
             const message = this.element.find('.support_message').getCtrl().getValue();
 
             const canSend = email.length && message.length;
-            const sendButton = this.element.find('.support_sendButton');
-            // TODO: change button's disabled state
+            const sendButton = this.element.find('.support_sendButton').getCtrl();
+
+            if (canSend) {
+                sendButton.enable();
+            } else {
+                sendButton.disable();
+            }
+
         }
 
         sendSupportForm() {
