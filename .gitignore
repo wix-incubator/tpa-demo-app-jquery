@@ -1,4 +1,4 @@
+*.css
 .idea
 dist
 node_modules
-*.css

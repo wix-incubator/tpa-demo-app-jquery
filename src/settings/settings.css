@@ -89,9 +89,9 @@
 .main-tab {
   text-align: center; }
   .main-tab .app-logo {
-    height: 81px;
-    width: 81px;
-    margin: 10px auto 0;
+    height: 60px;
+    width: 60px;
+    margin: 20px auto 0;
     position: relative; }
   .main-tab .app-description {
     text-align: center;
