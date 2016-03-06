@@ -6,8 +6,8 @@ requirejs.config({
         jquery: '/node_modules/jquery/dist/jquery',
         React: '/node_modules/react/dist/react-with-addons',
         mustache: '/node_modules/mustache/mustache',
-        Wix: '/lib/Wix-sdk/Wix',
-        UI: '/lib/editor-ui-lib/ui-lib-jquery'
+        Wix: '//static.parastorage.com/services/js-sdk/1.61.0/js/wix.min',
+        UI: '/node_modules/editor-ui-lib/lib/ui-lib-jquery'
     },
     map: {
         '*': {
