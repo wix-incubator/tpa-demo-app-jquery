@@ -7,7 +7,7 @@ define(['$', 'lodash'], function ($, _) {
         }
 
         attachListeners() {
-            this.element.find('.main-cta-btn').getCtrl().onClick(() => console.log('This is your call-to-action, take it seriously'));
+            this.element.find('.main_button').getCtrl().onClick(() => console.log('This is your call-to-action, take it seriously'));
         }
 
         onUpdate(key, value) {
