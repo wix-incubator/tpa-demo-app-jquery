@@ -1,3 +1,37 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<script src="//fb.me/react-with-addons-0.13.0.js"></script>-->
+<!--<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>-->
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>-->
+<!--<script src="//static.parastorage.com/services/js-sdk/1.61.0/js/wix.min.js"></script>-->
+<!--<script src="/node_modules/editor-ui-lib/lib/ui-lib-jquery.js"></script>-->
+<!--<title></title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+
+<!--&lt;!&ndash;<script src="../../lib/ui-lib-jquery.js"></script>&ndash;&gt;-->
+<!--<div wix-ctrl="appTabs" wix-options="{defaultTabIndex:1}">-->
+<!--<div tab="first tab"> first tab-->
+<!--</div>-->
+<!--<div tab="tab2" class="tab">-->
+<!--<div id="teaserPopup" wix-ctrl="TeaserPopup"></div>-->
+<!--<div>-->
+<!--<div id="radioButtons" wix-ctrl="RadioButtons" wix-options="{label: 'How many images to sync?', infoTitle: 'my radio info title', infoText: 'my radio info title', defaultValue:'3', options:[{ value: '1', title: 'Sync 10 images', className: 'firstOne'},{ value: '2', label: 'Sync 25 images', className: 'differentOne'},{ value: '3', label: 'Sync 50 images'}]}" wix-param="myRadioButtonsValue"></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<script>-->
+<!--$(document).ready(function() {-->
+
+<!--});-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,17 +43,92 @@
     <script src="/node_modules/react/dist/react-with-addons.js"></script>
     <script src="/node_modules/requirejs/require.js"></script>
     <script src="/config.requirejs.js"></script>
+    <script src="/node_modules/editor-ui-lib/lib/ui-lib-jquery.js"></script>
+
 </head>
 <body>
-<div id="root"></div>
+<div>
+
+    <div wix-ctrl="appTabs" wix-options="{defaultTabIndex:0}" id="root">
+        <div tab="Animations">
+            <div class="animations_type"
+                 wix-ctrl="DropDown"
+                 wix-options="{
+title: 'Animation',
+defaultValue: 'slide',
+options: [
+{ value: 'slide', label: 'Slide'},
+{ value: 'fade', label: 'Fade'},
+{ value: 'other', label: 'Something else'}
+]}">
+            </div>
+
+            <div wix-ctrl="SectionDividerLabeled"
+                 wix-options="{label: 'Animation settings'}" style=""
+                 infoText="info text"
+                 infoTitle="info title" />
+        </div>
+
+        <div class="button-wrapper-center">
+            <div class="animations_button"
+                 wix-ctrl="Button"
+                 wix-options="{
+label: 'Play Animation',
+icon: 'calendar'
+}">
+            </div>
+        </div>
+
+        <hr class="divider-long">
+
+        <div class="animations_direction"
+             wix-ctrl="DropDown"
+             wix-options="{
+title: 'Direction',
+defaultValue: 'right',
+options: [
+{ value: 'top', label: 'From Top'},
+{ value: 'right', label: 'From Right'},
+{ value: 'bottom', label: 'From Bottom'},
+{ value: 'left', label: 'From Left'}
+]}">
+        </div>
+
+        <hr class="divider-long">
+
+        <div class="animations_delay"
+             wix-ctrl="Slider"
+             wix-options="{
+title: 'Delay (secs)',
+min: 0,
+max: 2,
+step: 0.1,
+defaultValue: 0.6
+}">
+        </div>
+
+        <hr class="divider-long">
+
+        <div>
+            <div class="animations_oppositeEffect"
+                 wix-ctrl="Toggle"
+                 wix-options="{
+label: 'Opposite effect',
+defaultValue: true
+}">
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script>
     require(['jquery', 'settings/settings'], function ($, Settings) {
         'use strict';
-        $(document).ready(function () {
-            var comp = new Settings($('#root'));
-            comp.render();
-        });
+//         $(document).ready(function () {
+//            var comp = new Settings($('#root'));
+//            comp.render();
+//        });
     });
 </script>
 </body>
