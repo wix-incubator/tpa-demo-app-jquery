@@ -6,7 +6,6 @@
     "lodash": "^3.10.1",
     "mustache": "^2.2.1",
     "react": "^0.13.0",
-    "requirejs": "^2.1.22",
     "editor-ui-lib": "^0.0.4"
 },
   "devDependencies": {
