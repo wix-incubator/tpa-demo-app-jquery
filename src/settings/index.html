@@ -380,5 +380,18 @@
         </div>
     </div>
 </div>
+<script>
+    $(attachListeners);
+
+    function attachListeners() {
+        $('.layout_columns').getCtrl().onChange(newVal => onUpdate('layout_columns', newVal));
+        $('.layout_spacing').getCtrl().onChange(newVal => onUpdate('layout_spacing', newVal));
+    }
+
+    function onUpdate(key, value) {
+        const data = {key: key, value: value};
+        Wix.Settings.triggerSettingsUpdatedEvent(data);
+    }
+</script>
 </body>
 </html>

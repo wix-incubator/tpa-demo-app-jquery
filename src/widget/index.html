@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo App - Widget</title>
-
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//static.parastorage.com/services/js-sdk/1.63.0/js/wix.min.js"></script>
     <link rel="stylesheet" href="widget.css"/>
-
-    <script src="/node_modules/requirejs/require.js"></script>
-    <script src="/config.requirejs.js"></script>
+    <script src="widget.js"></script>
 
     <style wix-style>
         .wix-style-sample {
@@ -33,16 +32,25 @@
     </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root">
+    <div>
+        <section>
+            <h2>Design demo</h2>
+            <div class="wix-style-sample">
+                <h3 class="sample-element sample-title">Hello!</h3>
+                <p class="sample-element sample-content">Welcome to Demo App, let's play.</p>
+                <button class="sample-element sample-button">Click me!</button>
+                <form class="form">
+                    <input title="email" type="email" class="sample-element sample-input" value="I'm an email text field!">
+                </form>
+            </div>
+        </section>
 
-<script>
-    require(['jquery', 'widget/widget'], function ($, Widget) {
-        'use strict';
-        $(document).ready(function () {
-            var comp = new Widget($('#root'));
-            comp.render();
-        });
-    });
-</script>
+        <section class="settings-update">
+            <h2>Last settings update</h2>
+            <pre><code class="json">{{settingsUpdate}}</code></pre>
+        </section>
+    </div>
+</div>
 </body>
 </html>
