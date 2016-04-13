@@ -12,6 +12,7 @@
 
 </head>
 <body>
+    <div wix-ctrl="appSettings"></div>
     <div wix-ctrl="appTabs" wix-options="{defaultTabIndex:0}">
         <div tab="Main" class="main-tab">
             <img class="app-logo" src="logo.svg" alt="app logo"/>
@@ -384,8 +385,6 @@
     $(attachListeners);
 
     function attachListeners() {
-        $('.layout_columns').getCtrl().onChange(newVal => onUpdate('layout_columns', newVal));
-        $('.layout_spacing').getCtrl().onChange(newVal => onUpdate('layout_spacing', newVal));
     }
 
     function onUpdate(key, value) {
