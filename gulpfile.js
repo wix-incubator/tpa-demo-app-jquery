@@ -5,6 +5,6 @@ require('./tasks/babel');
 require('./tasks/serve');
 
 gulp.task('default', ['serve', 'css', 'babel'], function () {
-    gulp.watch('src/**/*.scss', ['css']);
+    gulp.watch('src/css/*.scss', ['css']);
     gulp.watch('src/**/*.js', ['babel']);
 });
