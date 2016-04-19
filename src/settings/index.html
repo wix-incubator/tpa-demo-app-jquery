@@ -385,6 +385,9 @@
     $(attachListeners);
 
     function attachListeners() {
+        $('[wix-ctrl=appTabs]').getCtrl().onChange(function(tabIndex){
+            console.log("change tab to tab " + tabIndex);
+        });
     }
 
     function onUpdate(key, value) {
