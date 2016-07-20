@@ -150,19 +150,25 @@
             </div>
         </div>
         <div tab="Layout">
+            <hr class="divider-long">
+
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'How does this gallery look?'}">
             </div>
 
+            <hr class="divider-long">
+
             <div class="layout_columns"
                  wix-ctrl="Slider"
                  wix-options="{
-            title: 'Columns',
-            min: 1,
-            max: 36,
-            defaultValue: 7
-         }">
+                    title: 'Columns',
+                    min: 1,
+                    max: 36,
+                    defaultValue: 7
+                 }">
             </div>
+
+            <hr class="divider-long">
 
             <div class="layout_spacing"
                  wix-ctrl="Slider"
@@ -175,67 +181,75 @@
             </div>
         </div>
         <div tab="Design" style="margin-bottom: 20px">
-            <div wix-ctrl="SectionDividerLabeled"
-                 wix-options="{label: 'Animation settings'}">
-            </div>
+            <hr class="divider-long">
 
-            <div class="design_titleFont"
-                 wix-ctrl="FontPicker"
-                 wix-options="{
-            title: 'Title style and color'
-         }"
-                 wix-param="design_titleFont">
+            <div wix-ctrl="SectionDividerLabeled"
+                 wix-options="{label: 'Text & Background'}">
             </div>
 
             <hr class="divider-long">
 
-            <div class="design_contentFont"
-                 wix-ctrl="FontPicker"
+            <div wix-param-font="titleFont"
+                 wix-param-color="titleColor"
+                 wix-ctrl="FontAndColorPicker"
                  wix-options="{
-            title: 'Content style and color'
-         }"
-                 wix-param="design_contentFont">
-            </div>
+                    title: 'Font style and color',
+                    startWithColor: 'color-1',
+                    startWithTheme: 'font_3',
+                    infoTitle: 'some info title',
+                    infoText: 'some information text should be here'
+                }"
+            ></div>
 
             <hr class="divider-long">
 
             <div class="design_backgroundColor"
-                 wix-ctrl="ColorPickerSlider"
-                 wix-options="{
-            title: 'Background',
-            startWithColor: 'color-5',
-            startWithOpacity: 0.5
-         }"
-                 wix-param="design_backgroundColor">
-            </div>
+                wix-param="design_backgroundColor"
+                wix-ctrl="ColorPickerSlider"
+                wix-options="{
+                    title: 'Background',
+                    startWithColor: 'color-5',
+                    startWithOpacity: 0.5
+                }"
+            ></div>
+
+            <hr class="divider-long">
 
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'Background'}">
             </div>
 
-            <div class="design_buttonFont"
-                 wix-ctrl="FontPicker"
+            <hr class="divider-long">
+
+            <div wix-param-font="btnFont"
+                 wix-param-color="btnColor"
+                 wix-ctrl="FontAndColorPicker"
                  wix-options="{
-            title: 'Button text'
-         }"
-                 wix-param="design_buttonFont">
-            </div>
+                    title: 'Button text',
+                    infoTitle: 'some info title',
+                    infoText: 'some information text should be here'
+                }"
+            ></div>
 
             <hr class="divider-long">
 
             <div class="design_buttonBackground"
-                 wix-ctrl="ColorPickerSlider"
-                 wix-options="{
-            title: 'Button background',
-            startWithColor: 'color-3',
-            startWithOpacity: 0.7
-         }"
-                 wix-param="design_buttonBackground">
-            </div>
+                wix-ctrl="ColorPickerSlider"
+                wix-param="design_buttonBackground"
+                wix-options="{
+                    title: 'Button background',
+                    startWithColor: 'color-3',
+                    startWithOpacity: 0.7
+                }"
+            ></div>
+
+            <hr class="divider-long">
 
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'Search fields'}">
             </div>
+
+            <hr class="divider-long">
 
             <div class="design_inputColor"
                  wix-ctrl="ColorPickerInput"
@@ -246,7 +260,7 @@
                  wix-param="design_inputColor">
             </div>
         </div>
-        <div tab="Animations">
+        <div tab="Animations" class="animations-tab">
             <div class="animations_type"
                  wix-ctrl="DropDown"
                  wix-options="{
@@ -258,17 +272,23 @@
                 { value: 'other', label: 'Something else'}
             ]}">
             </div>
+
+
+            <hr class="divider-long">
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'Animation settings', infoText: 'info text', infoTitle: 'info title'}" style="">
             </div>
+            <hr class="divider-long">
+
             <div class="button-wrapper-center">
                 <div class="animations_button"
-                     wix-ctrl="Button"
-                     wix-options="{
-                label: 'Play Animation',
-                icon: 'calendar'
-             }">
-                </div>
+                    wix-ctrl="Button"
+                    wix-options="{
+                        label: 'Play Animation',
+                        className: 'btn-confirm-secondary',
+                        icon: 'playAnimation'
+                    }"
+                ></div>
             </div>
 
             <hr class="divider-long">
@@ -311,18 +331,14 @@
             </div>
         </div>
         <div tab="Support" class="support-tab">
-            <div wix-ctrl="TeaserPopup"
-                 wix-options="{
-            title: 'Reach out',
-            text: 'Need help with the app? Think we can improve? Have an idea for a new feature? We would love to hear what you have to say, just click on our email or submit a message below',
-            gotItText: 'Close',
-            linkText: 'Learn More'
-         }">
-            </div>
+
+            <hr class="divider-long">
 
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'Developer info'}">
             </div>
+
+            <hr class="divider-long">
 
             <ul class="developer-info">
                 <li>
@@ -330,22 +346,26 @@
                     App FAQ
                 </li>
                 <li>
-                    <div wix-ctrl="Symbol" wix-options="{name: 'infoSmall'}"></div>
+                    <div wix-ctrl="Symbol" wix-options="{name: 'magnifyingGlass'}"></div>
                     support@wix.com
                 </li>
                 <li>
-                    <div wix-ctrl="Symbol" wix-options="{name: 'infoSmall'}"></div>
+                    <div wix-ctrl="Symbol" wix-options="{name: 'globus'}"></div>
                     Developer Website
                 </li>
                 <li>
-                    <div wix-ctrl="Symbol" wix-options="{name: 'infoSmall'}"></div>
+                    <div wix-ctrl="Symbol" wix-options="{name: 'phone'}"></div>
                     1 408 974 4897
                 </li>
             </ul>
 
+            <hr class="divider-long">
+
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'Review the app'}">
             </div>
+
+            <hr class="divider-long">
 
             <p class="review-paragraph">Have you enjoyed the app? Spread the word and rate us in the app market</p>
 
@@ -359,28 +379,34 @@
                 </div>
             </div>
 
+            <hr class="divider-long">
+
             <div wix-ctrl="SectionDividerLabeled"
                  wix-options="{label: 'Send us a message'}">
             </div>
 
+            <hr class="divider-long">
+
             <div class="support_email"
-                 wix-ctrl="Input"
-                 wix-options="{
-            title: 'What\'s your email? (optional)',
-            defaultText: 'Title'
-         }">
-            </div>
+                wix-ctrl="Input"
+                wix-options="{
+                    title: 'What\'s your email? (optional)',
+                    placeholder: 'Email'
+                }"
+            ></div>
+
+            <hr class="divider-short">
 
             <div class="support_message"
-                 wix-ctrl="Input"
-                 wix-options="{
-            title: 'What do you want to tell us?',
-            defaultText: 'Write us your message (new feature idea / other issues)',
-            isMultiLine: true
-         }">
-            </div>
+                wix-ctrl="Input"
+                wix-options="{
+                    title: 'What do you want to tell us?',
+                    placeholder: 'Write us your message (new feature idea / other issues)',
+                    isMultiLine: true
+                }"
+            ></div>
 
-            <hr class="divider-long">
+            <hr class="divider-short">
 
             <div class="button-wrapper-center">
                 <div class="support_sendButton"
