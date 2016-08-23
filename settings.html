@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo App - Settings</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react-with-addons.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.3.0/react-with-addons.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/15.3.0/react-dom.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
     <script src="//static.parastorage.com/services/js-sdk/1.65.0/js/wix.min.js"></script>
@@ -19,7 +20,7 @@
 <div wix-ctrl="appSettings"></div>
 <div wix-ctrl="panelTabs" wix-options="{defaultTabIndex:0}">
 
-    //*************main tab
+    <!--main tab-->
 
     <div tab="Main" class="main-tab">
         <img class="app-logo" src="src/settings/svg/logo.svg" alt="app logo"/>
@@ -37,7 +38,7 @@
         ></div>
     </div>
 
-    //*************settings tab
+    <!--settings tab-->
 
     <div tab="Settings">
         <div class="settings_onImageClick"
@@ -167,7 +168,7 @@
         ></div>
     </div>
 
-    //*************layout tab
+    <!--layout tab-->
 
     <div tab="Layout">
         <hr class="divider-long"/>
@@ -204,7 +205,7 @@
         ></div>
     </div>
 
-    //*************Design tab
+    <!--Design tab-->
 
     <div tab="Design" style="margin-bottom: 20px">
         <hr class="divider-long"/>
@@ -313,7 +314,7 @@
         ></div>
     </div>
 
-    //*************Animations tab
+    <!--Animations tab-->
 
     <div tab="Animations" class="animations-tab">
         <div id=dropdown class="animations_type"
@@ -390,7 +391,7 @@
         ></div>
     </div>
 
-    //*************Support tab
+    <!--Support tab-->
 
     <div tab="Support" class="support-tab">
         <hr class="divider-long"/>
