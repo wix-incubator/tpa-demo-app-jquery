@@ -75,7 +75,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2103160a7d29bfa044ff"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "290162b86bc7382d8cde"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -10334,26 +10334,34 @@ return /******/ (function(modules) { // webpackBootstrap
 	var jQuery = __webpack_require__(/*! jquery */ 383);
 
 	jQuery.fn.definePlugin('Button', function ($) {
+	    var onClickCallback = _.noop;
 	    return {
-	        init: function init() {
-	            this.onClick = function (cb) {
-	                this.comp.setProps({
-	                    onClick: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.button, this.options);
-
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(UI.button, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+	        init: function init() {
+	            var props = _.defaults({
+	                onClick: function onClick() {
+	                    onClickCallback.apply(this, arguments);
+	                }
+	            }, this.options);
+	            this.render(props);
 	            return this;
 	        },
 
+	        onClick: function onClick(cb) {
+	            this.render({ onClick: cb });
+	        },
+
 	        disable: function disable() {
-	            this.comp.setProps({ disabled: true });
+	            this.render({ disabled: true });
 	        },
 
 	        enable: function enable() {
-	            this.comp.setProps({ disabled: false });
+	            this.render({ disabled: false });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -14637,16 +14645,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            checked: this.props.defaultValue || false
+	            checked: this.props.defaultValue || false,
+	            disabled: this.props.disabled
 	        };
 	    },
 
 	    enable: function enable() {
-	        this.setProps({ disabled: false });
+	        this.setState({ disabled: false });
 	    },
 
 	    disable: function disable() {
-	        this.setProps({ disabled: true });
+	        this.setState({ disabled: true });
 	    },
 
 	    componentDidMount: function componentDidMount() {
@@ -14752,7 +14761,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'name': 'checkbox',
 	            'label': this.props.label,
 	            'labelAfterSymbol': true,
-	            'disabled': this.props.disabled,
+	            'disabled': this.state.disabled,
 	            'className': this.props.className,
 	            'value': this.state.checked,
 	            'infoTitle': this.props.infoTitle,
@@ -16389,7 +16398,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        getInitialState: function getInitialState() {
 	            return {
-	                value: this.props.defaultValue || this.props.options && this.props.options[0].value
+	                value: this.props.defaultValue || this.props.options && this.props.options[0].value,
+	                disabled: this.props.disabled
 	            };
 	        },
 	        componentDidMount: function componentDidMount() {
@@ -16435,10 +16445,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        },
 	        enable: function enable() {
-	            this.setProps({ disabled: false });
+	            this.setState({ disabled: false });
 	        },
 	        disable: function disable() {
-	            this.setProps({ disabled: true });
+	            this.setState({ disabled: true });
 	        },
 	        render: template
 	    });
@@ -16507,7 +16517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return React.createElement(radioButtons, {
 	            'valueLink': this.getValueLink('value'),
 	            'options': this.props.options,
-	            'disabled': this.props.disabled,
+	            'disabled': this.state.disabled,
 	            'infoText': this.props.infoText,
 	            'infoTitle': this.props.infoTitle,
 	            'label': this.props.title,
@@ -18303,16 +18313,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            checked: this.props.defaultValue || false
+	            checked: this.props.defaultValue || false,
+	            disabled: this.props.disabled
 	        };
 	    },
 
 	    enable: function enable() {
-	        this.setProps({ disabled: false });
+	        this.setState({ disabled: false });
 	    },
 
 	    disable: function disable() {
-	        this.setProps({ disabled: true });
+	        this.setState({ disabled: true });
 	    },
 
 	    componentDidMount: function componentDidMount() {
@@ -18372,7 +18383,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'name': 'switch',
 	            'label': this.props.label,
 	            'labelAfterSymbol': false,
-	            'disabled': this.props.disabled,
+	            'disabled': this.state.disabled,
 	            'className': this.props.className,
 	            'value': this.state.checked,
 	            'infoTitle': this.props.infoTitle,
@@ -20566,9 +20577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            'maxWidth': this.getMenuLabelWidth(),
 	            'isActive': this.isActiveTab(childIndex),
 	            'styleType': 'normal',
-	            'onClick': () => {
-	                this.tabClicked(childIndex);
-	            }
+	            'onClick': this.tabClicked.bind(this, childIndex)
 	        }, '\n                ', child.props.tab, '\n            ') : null, !child.props.tab ? React.createElement('div', { 'key': 'withoutTooltip' }, child) : null);
 	    }
 	    function repeatChild2(child, childIndex) {
@@ -20869,7 +20878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	    },
 	    componentDidMount: function componentDidMount() {
-	        window.requestAnimationFrame(this.setShouldUseTooltipState);
+	        this.setShouldUseTooltipState();
 	        // fixing first measure bug
 	        setTimeout(this.setShouldUseTooltipState, 100);
 	        window.addEventListener("resize", this.setShouldUseTooltipState);
@@ -21737,22 +21746,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onSlideEnd = function (cb) {
-	                this.comp.setProps({
-	                    onSlideEnd: cb
-	                });
-	            };
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-	            var wixParam = this.$el.attr('wix-param');
-
-	            var element = React.createElement(UI.slider, $.extend({ 'wix-param': wixParam }, defaults, this.options));
+	        uiComponent: UI.slider,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
+	        onSlideEnd: function onSlideEnd(cb) {
+	            this.render({ onSlideEnd: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -21794,16 +21807,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.stepper, $.extend({}, defaults, this.options));
+	        uiComponent: UI.stepper,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -21845,18 +21864,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var wixParam = this.$el.attr('wix-param');
-	            var element = React.createElement(UI.toggleSwitch, $.extend({ 'wix-param': wixParam }, defaults, this.options));
+	        uiComponent: UI.toggleSwitch,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
+	        disable: function disable() {
+	            this.comp.disable();
+	        },
+
+	        enable: function enable() {
+	            this.comp.enable();
+	        },
+
 	        getDefaults: function getDefaults() {
 	            return defaults;
 	        },
@@ -21869,12 +21902,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    checked: value
 	                });
 	            }
-	        },
-	        disable: function disable() {
-	            this.comp.disable();
-	        },
-	        enable: function enable() {
-	            this.comp.enable();
 	        }
 	    };
 	});
@@ -21904,17 +21931,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-	            var wixParam = this.$el.attr('wix-param');
-	            var element = React.createElement(UI.checkbox, $.extend({ 'wix-param': wixParam }, defaults, this.options));
+	        uiComponent: UI.checkbox,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
 	        getDefaults: function getDefaults() {
 	            return defaults;
 	        },
@@ -21965,32 +21999,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-	            this.onMouseOver = function (cb) {
-	                this.comp.setProps({
-	                    onMouseOverPreview: cb
-	                });
-	            };
-	            var wixParam = this.$el.attr('wix-param');
-
-	            var element = React.createElement(UI.radioButtons, $.extend({ 'wix-param': wixParam }, defaults, this.options));
+	        uiComponent: UI.radioButtons,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
-	            this.comp.setProps({
-	                valueLink: this.comp.getValueLink('selectedValue')
-	            });
-	            this.disable = function () {
-	                this.comp.disable();
-	            };
-	            this.enable = function () {
-	                this.comp.enable();
-	            };
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
+	        onMouseOver: function onMouseOver(cb) {
+	            this.render({ onMouseOverPreview: cb });
+	        },
+
+	        disable: function disable() {
+	            this.comp.disable();
+	        },
+
+	        enable: function enable() {
+	            this.comp.enable();
+	        },
+
 	        getDefaults: function getDefaults() {
 	            return defaults;
 	        },
@@ -22026,17 +22064,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    defaults.defaultValue = defaults.options[0].value;
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-	            var element = React.createElement(UI.toggleButtonsGroup, $.extend({}, defaults, this.options));
-
+	        uiComponent: UI.toggleButtonsGroup,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
 	        getDefaults: function getDefaults() {
 	            return defaults;
 	        },
@@ -22065,26 +22110,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	var UI = __webpack_require__(/*! wix-ui-react/ui */ 323);
 	var jQuery = __webpack_require__(/*! jquery */ 383);
 
-	jQuery.fn.definePlugin('toggleButtons', function ($) {
+	jQuery.fn.definePlugin('ToggleButtons', function ($) {
 	    var defaults = {
 	        defaultValue: '1',
 	        options: [{ value: '1', label: 'first', className: 'firstOne' }, { value: '2', label: 'second', className: 'secondOne' }]
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-	            var wixParam = this.$el.attr('wix-param');
-	            var options = wixParam ? { 'wix-param': wixParam } : {};
-	            var element = React.createElement(UI.toggleButtons, $.extend(options, defaults, this.options));
-
+	        uiComponent: UI.toggleButtons,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
 	        getDefaults: function getDefaults() {
 	            return defaults;
 	        },
@@ -22123,18 +22173,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	        init: function init() {
 	            this.onPreviewHover = function (cb) {
-	                this.comp.setProps({
-	                    onPreviewHover: cb
-	                });
+	                if (_.isFunction(cb)) {
+	                    cb();
+	                }
 	            };
 	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
+	                if (_.isFunction(cb)) {
+	                    cb();
+	                }
 	            };
 
-	            this.dockDirections = ['TOP_LEFT', 'TOP', 'TOP_RIGHT', 'LEFT', 'RIGHT', 'BOTTOM_LEFT', 'BOTTOM', 'BOTTOM_RIGHT'];
-	            var element = React.createElement(UI.dock, $.extend({}, defaults, this.options));
+	            var element = React.createElement(UI.dock, $.extend(defaults, this.options, {
+	                onPreviewHover: this.onPreviewHover,
+	                onChange: this.onChange
+	            }));
 	            this.comp = ReactDOM.render(element, this.$el[0]);
 	            return this;
 	        },
@@ -22435,44 +22487,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	    'use strict';
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            this.onBlur = function (cb) {
-	                this.comp.setProps({
-	                    onBlur: function onBlur(reactEvent) {
-	                        cb($.Event(reactEvent.nativeEvent));
-	                    }
-	                });
-	            };
-
-	            this.onFocus = function (cb) {
-	                this.comp.setProps({
-	                    onFocus: function onFocus(reactEvent) {
-	                        cb($.Event(reactEvent.nativeEvent));
-	                    }
-	                });
-	            };
-
-	            this.setValidationFunction = function (func) {
-	                this.comp.setProps({
-	                    validator: func
-	                });
-	            };
-
-	            var element = React.createElement(UI.textInput, this.options);
-
+	        uiComponent: UI.textInput,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+
+	        onBlur: function onBlur(cb) {
+	            this.render({
+	                onBlur: function onBlur(reactEvent) {
+	                    cb($.Event(reactEvent.nativeEvent));
+	                }
+	            });
+	        },
+
+	        onFocus: function onFocus(cb) {
+	            this.render({
+	                onFocus: function onFocus(reactEvent) {
+	                    cb($.Event(reactEvent.nativeEvent));
+	                }
+	            });
+	        },
+
+	        setValidationFunction: function setValidationFunction(cb) {
+	            this.render({ validator: cb });
+	        },
+
 	        getDefaults: function getDefaults() {},
+
 	        getValue: function getValue() {
 	            return this.comp.getValue();
 	        },
+
 	        setValue: function setValue(value) {
 	            this.comp.setValue(value);
 	        }
@@ -22510,15 +22568,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-	            var element = React.createElement.apply(this, [UI.dropDownSelect, getProps.call(this)]);
+	        uiComponent: UI.dropDownSelect,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            this.render(getProps.call(this));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22552,18 +22616,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	jQuery.fn.definePlugin('ColorPickerSlider', function ($) {
 	    return {
+	        uiComponent: UI.colorPickerSlider,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
+	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
 	        init: function init() {
 	            var wixParam = this.$el.attr('wix-param');
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.colorPickerSlider, _.defaults({ 'wix-param': wixParam }, this.options));
-
-	            this.comp = ReactDOM.render(element, this.$el[0]);
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22597,18 +22665,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	jQuery.fn.definePlugin('ColorPickerInput', function ($) {
 	    return {
+	        uiComponent: UI.colorPickerInput,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
+	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
 	        init: function init() {
 	            var wixParam = this.$el.attr('wix-param');
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.colorPickerInput, _.defaults({ 'wix-param': wixParam }, this.options));
-
-	            this.comp = ReactDOM.render(element, this.$el[0]);
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22640,18 +22712,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	jQuery.fn.definePlugin('FontPicker', function ($) {
 	    return {
+	        uiComponent: UI.fontPicker,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
+	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
 	        init: function init() {
 	            var wixParam = this.$el.attr('wix-param');
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.fontPicker, _.defaults({ 'wix-param': wixParam }, this.options));
-
-	            this.comp = ReactDOM.render(element, this.$el[0]);
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22683,19 +22759,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	jQuery.fn.definePlugin('FontAndColorPicker', function ($) {
 	    return {
+	        uiComponent: UI.fontAndColorPicker,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
+	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
 	        init: function init() {
 	            var wixParamFont = this.$el.attr('wix-param-font');
 	            var wixParamColor = this.$el.attr('wix-param-color');
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.fontAndColorPicker, _.defaults({ 'wix-param-font': wixParamFont, 'wix-param-color': wixParamColor }, this.options));
-
-	            this.comp = ReactDOM.render(element, this.$el[0]);
+	            this.render(_.defaults({ 'wix-param-font': wixParamFont, 'wix-param-color': wixParamColor }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22727,17 +22807,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	jQuery.fn.definePlugin('LanguagePicker', function ($) {
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.languagePicker, this.options);
-
+	        uiComponent: UI.languagePicker,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22818,16 +22903,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    return {
-	        init: function init() {
-	            this.linkClicked = function (cb) {
-	                this.comp.setProps({
-	                    linkClicked: cb
-	                });
-	            };
-
-	            var element = React.createElement(UI.teaserPopup, $.extend({}, this.options));
+	        uiComponent: UI.teaserPopup,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+
+	        linkClicked: function linkClicked(cb) {
+	            this.render({ linkClicked: cb });
 	        },
 
 	        getDefaults: function getDefaults() {
@@ -22861,27 +22952,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	var jQuery = __webpack_require__(/*! jquery */ 383);
 
 	jQuery.fn.definePlugin('TextInputWithButton', function ($) {
-
 	    'use strict';
 
 	    return {
-	        init: function init() {
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
-	            this.setValidationFunction = function (func) {
-	                this.comp.setProps({
-	                    validator: func
-	                });
-	            };
-
-	            var element = React.createElement(UI.textInputWithButton, this.options);
-
+	        uiComponent: UI.textInputWithButton,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
+	        },
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
+	        setValidationFunction: function setValidationFunction(cb) {
+	            this.render({ validator: cb });
 	        },
 	        getDefaults: function getDefaults() {},
 	        getValue: function getValue() {
@@ -22973,29 +23063,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	jQuery.fn.definePlugin('ImagePreview', function () {
 	    return {
-	        init: function init() {
-	            var element = React.createElement(UI.imagePreview, this.options);
+	        uiComponent: UI.imagePreview,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
 	            this.comp = ReactDOM.render(element, this.$el[0]);
+	        },
+
+	        init: function init() {
+	            var wixParam = this.$el.attr('wix-param');
+	            this.render(_.defaults({ 'wix-param': wixParam }, this.options));
 	            return this;
 	        },
+
 	        getDefaults: _.noop,
 	        getValue: function getValue() {
 	            return this.comp.state.value;
 	        },
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
+	        },
 	        setValue: function setValue(value) {
-	            this.comp.setProps({
-	                value: value
-	            });
+	            if (this.comp.state.value !== value) {
+	                this.render({ value: value });
+	            }
 	        },
 	        setButtons: function setButtons(buttons) {
-	            this.comp.setProps({
-	                buttons: buttons
-	            });
-	        },
-	        onChange: function onChange(callback) {
-	            this.comp.setProps({
-	                onChange: callback
-	            });
+	            this.render({ buttons: buttons });
 	        }
 	    };
 	});
@@ -23019,33 +23114,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	jQuery.fn.definePlugin('panelTabs', function ($) {
 	    'use strict';
 
-	    var defaults = {
-	        defaultTabIndex: 0
-	    };
-
 	    return {
-	        getDefaults: function getDefaults() {
-	            return defaults;
+	        uiComponent: UI.panelTabs,
+	        render: function render(nextProps) {
+	            var currentProps = _.get(this, 'comp.props', {});
+	            var props = _.defaults(nextProps, currentProps);
+	            var element = React.createElement(this.uiComponent, props);
+	            this.comp = ReactDOM.render(element, this.$el[0]);
 	        },
-
-	        getValue: function getValue() {
-	            return this.comp.state.activeTabIndex;
-	        },
-
-	        setValue: function setValue(value) {
-	            if (_.isNumber(value)) {
-	                this.comp.setActiveTab(value);
-	            }
-	        },
-
 	        init: function init() {
-	            var defaultTabIndex = this.options.defaultTabIndex;
-	            this.onChange = function (cb) {
-	                this.comp.setProps({
-	                    onChange: cb
-	                });
-	            };
-
 	            var children = this.$el.children();
 	            children = children.map(function (index, child) {
 	                var props = {
@@ -23059,16 +23136,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return React.createElement('div', props);
 	            });
 
-	            var tabs = React.createElement(UI.panelTabs, {
-	                defaultTabIndex: defaultTabIndex,
+	            var props = _.defaults({
 	                children: children.toArray()
-	            });
-
-	            var container = this.$el[0];
-	            $(container).css('height', '100%');
-	            this.comp = ReactDOM.render(tabs, container);
+	            }, this.options);
+	            this.render(props);
+	            this.$el.css({ height: '100%' });
 	            Wix.UI && Wix.UI.initialize({ $rootEl: this.$el });
 	            return this;
+	        },
+	        getDefaults: _.noop,
+	        getValue: function getValue() {
+	            return this.comp.state.activeTabIndex;
+	        },
+	        setValue: function setValue(value) {
+	            if (_.isNumber(value)) {
+	                this.comp.setActiveTab(value);
+	            }
+	        },
+	        onChange: function onChange(cb) {
+	            this.render({ onChange: cb });
 	        }
 	    };
 	});
