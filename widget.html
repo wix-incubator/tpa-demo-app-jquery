@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo App - Widget</title>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//static.parastorage.com/services/js-sdk/1.66.0/js/wix.min.js"></script>
+    <link rel="stylesheet" href="src/widget/widget.css"/>
+    <script src="dist/widget.js"></script>
+
+    <style wix-style>
+        .wix-style-sample {
+        background: {{style._backgroundColor color-1}};
+        }
+
+        .sample-title {
+        {{style._titleFont Heading-L}}
+        color: {{style._titleColor color-5}};
+        }
+
+        .sample-content {
+        {{style._descFont Body-M}}
+        color: {{style._descColor color-4}};
+        }
+
+        .sample-button {
+        background: {{style._btnBgColor color-8}};
+        color: {{style._btnTextColor color-1}};
+        {{style._btnFont Body-M}}
+        }
+
+        .sample-button:hover {
+        background: {{color-7}};
+        opacity: 0.75;
+        }
+
+        .sample-input {
+        background:{{style._inputFieldBackground color-1}};
+        color: {{style._inputColor color-3}};
+        {{style._inputFont Body-M}}
+        border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div>
+            <div class="wix-style-sample">
+                <h3 class="sample-element sample-title">Demo App</h3>
+                <p class="sample-element sample-content">Welcome to Demo App, let's play!</p>
+                <form class="form">
+                    <input title="email" type="email" class="sample-element sample-input" placeholder="I'm an email text field!" >
+                </form>
+                <button class="sample-element sample-button">Click me!</button>
+                <br/>
+                <br/>
+                <hr/>
+                <h3 class="sample-element sample-title">Last settings update</h3>
+                <pre>
+                    <code class="json sample-content"></code>
+                </pre>
+            </div>
+    </div>
+</body>
+</html>
