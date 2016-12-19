@@ -15,6 +15,7 @@
 <div wix-ctrl="appSettings" props-id="appSettingsProps">
     <div wix-ctrl="panelTabs" defaultTabIndex="0">
 
+
         <!--main tab-->
 
         <div wix-ctrl="panelTab" label="Main" class="main-tab">
@@ -24,49 +25,347 @@
                 Please add a short description of your App + CTA for the main action.
             </p>
 
-            <div class="main_button" wix-ctrl="Button" props-id="main-button-props" className="btn-confirm-primary" id="main-cta">
-                <span>Main CTA</span>
+            <div class="main_button">
+                <div wix-ctrl="Button" id="main-cta" class="btn-confirm-promary">Main CTA</div>
             </div>
-
-            <hr wix-ctrl="divider" long="true"/>
-            <div wix-ctrl="SectionDividerLabeled">
-                Enable functionality
-            </div>
-            <hr wix-ctrl="divider" long="true"/>
-
-            <span>short divider</span>
-            <hr wix-ctrl="divider"/>
-
-            <div wix-ctrl="textInput" props-id="textInputProps"></div>
-            <hr wix-ctrl="divider" long="true"/>
-
-            <div wix-ctrl="textInputMultiline"></div>
-            <hr wix-ctrl="divider" long="true"/>
-
-            <div wix-ctrl="toggleSwitch" wix-param="booleanValue" label="label with labelAfterSymbol label with labelAfterSymbol"></div>
-            <div wix-ctrl="checkbox" wix-param="booleanValue" label="checkbox with labelAfterSymbol"></div>
-
-            <div wix-ctrl="tooltip" value="tooltip content">
-                <span style="background: yellow; padding: 5px; margin: 5px;">hover me! I have a lovely tooltip!</span>
-            </div>
-
-            <div wix-ctrl="dropDownSelect" wix-param="numeric1-3Value" props-id="dropDownSelectProps"></div>
-            <div wix-ctrl="radioButtons" wix-param="numeric1-3Value" props-id="dropDownSelectProps"></div>
-
-            <h1 style="background-color: rgb(220, 217, 217); margin: 0; padding: 4px 10px; border: 1px solid #c2c2f5; font-size: 24px; border-width: 1px 0;">old school components</h1>
-
         </div>
 
         <!--settings tab-->
 
-        <div wix-ctrl="panelTab" label="Settings" class="main-tab">
-            <div wix-ctrl="fontPicker" title="Font Picker" title="title" text="text" wix-param="fontPickerParam"></div>
-            <div wix-ctrl="fontAndColorPicker" title="Font Picker" title="title" text="text" wix-param="fontPickerParam"></div>
-            <div wix-ctrl="colorPickerInput" title="Font Picker" title="title" text="text" wix-param="fontPickerParam"></div>
-            <div wix-ctrl="colorPickerSlider" title="Font Picker" title="title" text="text" wix-param="fontPickerParam"></div>
+        <div wix-ctrl="panelTab" label="Settings">
+            <div class="settings_onImageClicksettings_onImageClick"
+                 wix-ctrl="DropDownSelect"
+                 wix-param="dropdown"
+                 title="When image is clicked"
+                 props-id="dropdownPropsId"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+            <div wix-ctrl="SectionDividerLabeled">Enable functionality</div>
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div>
+                <div class="settings_allowEditing"
+                     wix-ctrl="ToggleSwitch"
+                     label="Allow editing"
+                     wix-param="editingToggle"
+                ></div>
+            </div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div>
+                <div class="settings_allowDeleting"
+                     wix-ctrl="ToggleSwitch"
+                     label="Allow deleting"
+                     wix-param="deletingToggle"
+                ></div>
+            </div>
+
+            <hr wix-ctrl="divider" long="true"/>
+            <div wix-ctrl="SectionDividerLabeled">Display info</div>
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div>
+                <div class="settings_displayName"
+                     wix-ctrl="Checkbox"
+                     wix-param="nameCheckbox"
+                     label="Name"
+                ></div>
+            </div>
+
+            <div>
+                <div class="settings_displayTitle"
+                     wix-ctrl="Checkbox"
+                     wix-param="titleCheckbox"
+                     label="Title"
+                ></div>
+            </div>
+
+            <div>
+                <div class="settings_displayDescription"
+                     wix-ctrl="Checkbox"
+                     wix-param="dscCheckbox"
+                     label="Description"
+                ></div>
+            </div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div id= "radio" class="settings_taxOnImage"
+                wix-ctrl="RadioButtons"
+                props-id="settings_taxOnImage_params"
+                wix-param="radioBtns"
+                title="Do images show text?"
+            ></div>
+
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="settings_textFieldContent"
+                wix-ctrl="TextInput"
+                title="Text field"
+                defaultText="Title"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="settings_textAreaContent"
+                wix-ctrl="textInputMultiline"
+                props-id="settings_textAreaContent"
+                title="Text area"
+                defaultText="Paragraph"
+            ></div>
         </div>
 
-        <div wix-ctrl="Button">Upgrade</div>
+        <!--layout tab-->
+
+        <div wix-ctrl="panelTab" label="Layout">
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="SectionDividerLabeled">How does this gallery look?</div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="layout_columns"
+                 id="slide_column"
+                 wix-ctrl="Slider"
+                 wix-param="columnSlider"
+                 wix-options="{
+                    title: 'Columns',
+                    min: 1,
+                    max: 36,
+                    defaultValue: 7
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="layout_spacing"
+                 wix-ctrl="Slider"
+                 wix-param="spaceSlider"
+                 wix-options="{
+                    title: 'Spacing (px)',
+                    min: 0,
+                    max: 50,
+                    defaultValue: 10
+                }"
+            ></div>
+        </div>
+
+        <!--Design tab-->
+
+        <div wix-ctrl="panelTab" label="Design" style="margin-bottom: 20px">
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="SectionDividerLabeled">Text & Background</div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param-font="_titleFont"
+                 wix-param-color="_titleColor"
+                 wix-ctrl="FontAndColorPicker"
+                 wix-options="{
+                    title: 'Title Font style and color',
+                    startWithColor: 'color-5',
+                    startWithTheme:'font_4',
+                    infoTitle: 'some info title',
+                    infoText: 'some information text should be here'
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param-font="_descFont"
+                 wix-param-color="_descColor"
+                 wix-ctrl="FontAndColorPicker"
+                 wix-options="{
+                    title: 'Description Font style & color',
+                    startWithColor: 'color-4',
+                    startWithTheme:'font_8',
+                    infoTitle: 'some info title',
+                    infoText: 'some information text should be here'
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param="_backgroundColor"
+                 wix-ctrl="ColorPickerSlider"
+                 wix-options="{
+                    title: 'Background Color',
+                    startWithColor: 'color-1'
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="SectionDividerLabeled">Search fields</div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param-font="_inputFont"
+                 wix-param-color="_inputColor"
+                 wix-ctrl="FontAndColorPicker"
+                 wix-options="{
+                    title: 'Field Font style & color',
+                    startWithColor: 'color-3',
+                    startWithTheme:'font_8',
+                    infoTitle: 'some info title',
+                    infoText: 'some information text should be here'
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param="inputFieldBackground"
+                 wix-ctrl="ColorPickerSlider"
+                 wix-options="{
+                    title: 'Input Field Background',
+                    startWithColor: 'color-1'
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="SectionDividerLabeled">Button</div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param-font="_btnFont"
+                 wix-param-color="_btnTextColor"
+                 wix-ctrl="FontAndColorPicker"
+                 wix-options="{
+                    title: 'Button Font  & Color',
+                    startWithColor: 'color-1',
+                    startWithTheme:'font_8',
+                    startWithSize:15,
+                    infoTitle: 'some info title',
+                    infoText: 'some information text should be here'
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-param="_btnBgColo"
+                 wix-ctrl="ColorPickerSlider"
+                 wix-options="{
+                    title: 'Button Background',
+                    startWithColor: 'color-8'
+                }"
+            ></div>
+        </div>
+
+        <!--Animations tab-->
+
+        <div wix-ctrl="panelTab" label="Animations" class="animations-tab">
+            <div class="animations_type"
+                 wix-ctrl="DropDownSelect"
+                 wix-param="animation"
+                 title="Animation"
+                 props-id="animationProps"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="SectionDividerLabeled">Animation settings</div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="button-wrapper-center">
+                <div class="animations_button btn-confirm-secondary" wix-ctrl="Button">
+                    <span wix-ctrl="Symbol" name="playAnimation"></span>
+                    Play Animation
+                </div>
+            </div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="animations_direction"
+                 wix-ctrl="DropDownSelect"
+                 wix-param="animationDirection"
+                 title="Direction"
+                 props-id="animationDirectionProps"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="animations_delay"
+                 wix-ctrl="Slider"
+                 wix-options="{
+                    title: 'Delay (secs)',
+                    min: 0,
+                    max: 2,
+                    step: 0.1,
+                    defaultValue: 0.6
+                }"
+            ></div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="ToggleSwitch" wix-param="animations_oppositeEffect" class="animations_oppositeEffect" wix-param="booleanValue" label="Opposite effect"></div>
+        </div>
+
+        <!--Support tab-->
+
+        <div wix-ctrl="panelTab" label="Support" class="support-tab">
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div wix-ctrl="SectionDividerLabeled">Developer info</div>
+
+            <hr wix-ctrl="divider" long="true"/>
+
+            <ul class="developer-info">
+                <li>
+                    <div wix-ctrl="Symbol" name="email"></div>
+                    support@wix.com
+                </li>
+                <li>
+                    <div wix-ctrl="Symbol" name="globe"></div>
+                    Developer Website
+                </li>
+                <li>
+                    <div wix-ctrl="Symbol" name="phone"></div>
+                    1 408 974 4897
+                </li>
+            </ul>
+
+            <hr wix-ctrl="divider" long="true"/>
+            <div wix-ctrl="SectionDividerLabeled">Review the app</div>
+            <hr wix-ctrl="divider" long="true"/>
+
+            <p class="review-paragraph">Have you enjoyed the app? Spread the word and rate us in the app market</p>
+
+            <div class="button-wrapper-center">
+                <div class="support_rateUs btn-confirm-primary" wix-ctrl="Button">Rate Us</div>
+            </div>
+
+            <hr wix-ctrl="divider" long="true"/>
+            <div wix-ctrl="SectionDividerLabeled">Send us a message</div>
+            <hr wix-ctrl="divider" long="true"/>
+
+            <div class="support_email"
+                 wix-ctrl="TextInput"
+                 placeholder="Email"
+            ></div>
+
+            <hr wix-ctrl="divider"/>
+
+            <div class="support_message"
+                 wix-ctrl="TextInputMultiline"
+                placeholder="Write us your message (new feature idea / other issues)"
+            ></div>
+
+            <hr wix-ctrl="divider"/>
+
+            <div class="button-wrapper-center">
+                <div class="support_sendButton" wix-ctrl="Button">Send</div>
+            </div>
+        </div>
+
+        <hr wix-ctrl="divider"/>
+
+        <div wix-ctrl="Button" class="btn-upgrade-nav">Upgrade</div>
     </div>
 
     <script>
@@ -74,37 +373,54 @@
             appSettingsProps: {
                 DBClass: UI.styleParamDB,
                 defaultDBValue: {
-                    booleanValue: false,
-                    'numeric1-3Value': '2',
-                    fontPickerParam: {},
-                    colorPickerParam: {}
+                    dropdown: '0',
+                    editingToggle: true,
+                    deletingToggle: true,
+                    nameCheckbox: false,
+                    titleCheckbox: true,
+                    dscCheckbox: true,
+                    radioBtns: '1',
+                    animation: '0',
+                    animationDirection: '2',
+                    animations_oppositeEffect: true
                 }
             },
-            "main-button-props": {
-                onClick: function () {
-                    console.log('button clicked');
-                }
-            },
-            textInputProps: {
-                placeholder: 'placeholder',
-                onChange: function (val) {
-                    console.log(val)
-                }
-            },
-            dropDownSelectProps: {
+            dropdownPropsId: {
                 options: [
-                    {value: '1', label: 'main'},
-                    {value: '2', label: 'sub level 1'},
-                    {value: '3', label: 'sub 2 level 1'}
-                ],
-                onChange: function (val) {
-                    console.log(val);
-                }
+                    {value: '0', label: 'Enter expand mode'},
+                    {value: '1', label: 'Show on full screen'},
+                    {value: '2', label: 'Do nothing'}
+
+                ]
+            },
+            settings_taxOnImage_params: {
+                options: [
+                    { value: '1', label: 'A title and a description'},
+                    { value: '2', label: 'Just a title'},
+                    { value: '3', label: 'Just a description'}
+                ]
+            },
+            settings_textAreaContent: {
+                focus: true
+            },
+            animationProps: {
+                options: [
+                    { value: '0', label: 'Slide'},
+                    { value: '1', label: 'Fade'},
+                    { value: '2', label: 'Something else'}
+                ]
+            },
+            animationDirectionProps: {
+                options: [
+                    { value: '1', label: 'From Top'},
+                    { value: '2', label: 'From Right'},
+                    { value: '3', label: 'From Bottom'},
+                    { value: '4', label: 'From Left'}
+                ]
             }
         }
         var root = $('[wix-ctrl="appSettings"]')[0]
         UI.init(root, props, function () {
-            props.dropDownSelectProps.options.push({value: '4', label: 'inserted after render'})
             console.log('editor ui lib initialize done');
         })
     </script>
