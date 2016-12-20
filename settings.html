@@ -25,26 +25,32 @@
                 Please add a short description of your App + CTA for the main action.
             </p>
 
-            <div class="main_button">
-                <div wix-ctrl="Button" id="main-cta" class="btn-confirm-promary">Main CTA</div>
+            <div wix-ctrl="Composites.ButtonLargeUnlabeled">
+                <div wix-ctrl="Button" id="main-cta" class="btn-confirm-promary">
+                    Main CTA
+                </div>
             </div>
         </div>
 
         <!--settings tab-->
 
         <div wix-ctrl="panelTab" label="Settings">
-            <div class="settings_onImageClicksettings_onImageClick"
-                 wix-ctrl="DropDownSelect"
-                 wix-param="dropdown"
-                 title="When image is clicked"
-                 props-id="dropdownPropsId"
-            ></div>
+
+            <div wix-ctrl="Composites.DropDownLabeled">
+                <h4 wix-ctrl="textLabel" value="When image is clicked"></h4>
+                <div class="settings_onImageClicksettings_onImageClick"
+                     wix-ctrl="DropDownSelect"
+                     wix-param="dropdown"
+                     title="When image is clicked"
+                     props-id="dropdownPropsId"
+                ></div>
+            </div>
 
             <hr wix-ctrl="divider" long="true"/>
             <div wix-ctrl="SectionDividerLabeled">Enable functionality</div>
             <hr wix-ctrl="divider" long="true"/>
 
-            <div>
+            <div wix-ctrl="Composites.ToggleSwitchUnlabeled">
                 <div class="settings_allowEditing"
                      wix-ctrl="ToggleSwitch"
                      label="Allow editing"
@@ -54,7 +60,7 @@
 
             <hr wix-ctrl="divider" long="true"/>
 
-            <div>
+            <div wix-ctrl="Composites.ToggleSwitchUnlabeled">
                 <div class="settings_allowDeleting"
                      wix-ctrl="ToggleSwitch"
                      label="Allow deleting"
@@ -66,56 +72,65 @@
             <div wix-ctrl="SectionDividerLabeled">Display info</div>
             <hr wix-ctrl="divider" long="true"/>
 
-            <div>
+            <div wix-ctrl="Composites.CheckboxesUnlabeled">
                 <div class="settings_displayName"
                      wix-ctrl="Checkbox"
                      wix-param="nameCheckbox"
+                     wix-options="{labelAfterSymbol: true}"
                      label="Name"
                 ></div>
-            </div>
 
-            <div>
                 <div class="settings_displayTitle"
                      wix-ctrl="Checkbox"
                      wix-param="titleCheckbox"
+                     wix-options="{labelAfterSymbol: true}"
                      label="Title"
                 ></div>
-            </div>
 
-            <div>
                 <div class="settings_displayDescription"
                      wix-ctrl="Checkbox"
                      wix-param="dscCheckbox"
+                     wix-options="{labelAfterSymbol: true}"
                      label="Description"
                 ></div>
             </div>
 
             <hr wix-ctrl="divider" long="true"/>
 
-            <div id= "radio" class="settings_taxOnImage"
-                wix-ctrl="RadioButtons"
-                props-id="settings_taxOnImage_params"
-                wix-param="radioBtns"
-                title="Do images show text?"
-            ></div>
+            <div wix-ctrl="Composites.RadioButtonsLabeled">
+                <h4 wix-ctrl="textLabel" value="Do images show text?"></h4>
+                <div id= "radio" class="settings_taxOnImage"
+                    wix-ctrl="RadioButtons"
+                    props-id="settings_taxOnImage_params"
+                    wix-param="radioBtns"
+                    title="Do images show text?"
+                ></div>
+            </div>
 
 
             <hr wix-ctrl="divider" long="true"/>
 
-            <div class="settings_textFieldContent"
-                wix-ctrl="TextInput"
-                title="Text field"
-                defaultText="Title"
-            ></div>
+            <div wix-ctrl="Composites.TextInputLabeled">
+                <h4 wix-ctrl="textLabel" value="Text field"></h4>
+                <div class="settings_textFieldContent"
+                    wix-ctrl="TextInput"
+                    title="Text field"
+                    defaultText="Title"
+                ></div>
+            </div>
 
             <hr wix-ctrl="divider" long="true"/>
 
-            <div class="settings_textAreaContent"
-                wix-ctrl="textInputMultiline"
-                props-id="settings_textAreaContent"
-                title="Text area"
-                defaultText="Paragraph"
-            ></div>
+
+            <div wix-ctrl="Composites.TextInputLabeled">
+                <h4 wix-ctrl="textLabel" value="Text area"></h4>
+                <div class="settings_textAreaContent"
+                    wix-ctrl="textInputMultiline"
+                    props-id="settings_textAreaContent"
+                    title="Text area"
+                    defaultText="Paragraph"
+                ></div>
+            </div>
         </div>
 
         <!--layout tab-->
@@ -367,63 +382,65 @@
 
         <div wix-ctrl="Button" class="btn-upgrade-nav">Upgrade</div>
     </div>
-
-    <script>
-        var props = {
-            appSettingsProps: {
-                DBClass: UI.styleParamDB,
-                defaultDBValue: {
-                    dropdown: '0',
-                    editingToggle: true,
-                    deletingToggle: true,
-                    nameCheckbox: false,
-                    titleCheckbox: true,
-                    dscCheckbox: true,
-                    radioBtns: '1',
-                    animation: '0',
-                    animationDirection: '2',
-                    animations_oppositeEffect: true
-                }
-            },
-            dropdownPropsId: {
-                options: [
-                    {value: '0', label: 'Enter expand mode'},
-                    {value: '1', label: 'Show on full screen'},
-                    {value: '2', label: 'Do nothing'}
-
-                ]
-            },
-            settings_taxOnImage_params: {
-                options: [
-                    { value: '1', label: 'A title and a description'},
-                    { value: '2', label: 'Just a title'},
-                    { value: '3', label: 'Just a description'}
-                ]
-            },
-            settings_textAreaContent: {
-                focus: true
-            },
-            animationProps: {
-                options: [
-                    { value: '0', label: 'Slide'},
-                    { value: '1', label: 'Fade'},
-                    { value: '2', label: 'Something else'}
-                ]
-            },
-            animationDirectionProps: {
-                options: [
-                    { value: '1', label: 'From Top'},
-                    { value: '2', label: 'From Right'},
-                    { value: '3', label: 'From Bottom'},
-                    { value: '4', label: 'From Left'}
-                ]
-            }
-        }
-        var root = $('[wix-ctrl="appSettings"]')[0]
-        UI.init(root, props, function () {
-            console.log('editor ui lib initialize done');
-        })
-    </script>
 </div>
+
+<script>
+    var props = {
+        appSettingsProps: {
+            DBClass: UI.styleParamDB,
+            defaultDBValue: {
+                dropdown: '0',
+                editingToggle: true,
+                deletingToggle: true,
+                nameCheckbox: false,
+                titleCheckbox: true,
+                dscCheckbox: true,
+                radioBtns: '1',
+                animation: '0',
+                animationDirection: '2',
+                animations_oppositeEffect: true
+            }
+        },
+        dropdownPropsId: {
+            options: [
+                {value: '0', label: 'Enter expand mode'},
+                {value: '1', label: 'Show on full screen'},
+                {value: '2', label: 'Do nothing'}
+
+            ]
+        },
+        settings_taxOnImage_params: {
+            options: [
+                { value: '1', label: 'A title and a description'},
+                { value: '2', label: 'Just a title'},
+                { value: '3', label: 'Just a description'}
+            ]
+        },
+        settings_textAreaContent: {
+            focus: true
+        },
+        animationProps: {
+            options: [
+                { value: '0', label: 'Slide'},
+                { value: '1', label: 'Fade'},
+                { value: '2', label: 'Something else'}
+            ]
+        },
+        animationDirectionProps: {
+            options: [
+                { value: '1', label: 'From Top'},
+                { value: '2', label: 'From Right'},
+                { value: '3', label: 'From Bottom'},
+                { value: '4', label: 'From Left'}
+            ]
+        }
+    }
+    var root = $('[wix-ctrl="appSettings"]')[0]
+    UI.init(root, props, function () {
+        console.log('editor ui lib initialize done');
+    })
+</script>
+<script src="dist/settings.js"></script>
+
 </body>
 </html>
