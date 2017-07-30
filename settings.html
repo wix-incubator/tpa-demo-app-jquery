@@ -8,7 +8,7 @@
     <script src="//static.parastorage.com/services/third-party/jquery/3.1.1/dist/jquery.min.js"></script>
     <script src="//static.parastorage.com/services/third-party/lodash/4.17.2/lodash.js"></script>
     <script src="//static.parastorage.com/services/js-sdk/1.77.0/js/wix.min.js"></script>
-    <script src="//static.parastorage.com/services/editor-ui-lib/1.26.0/lib/editor-ui-lib-jquery.min.js"></script>
+    <script src="//static.parastorage.com/services/editor-ui-lib/1.28.0/lib/editor-ui-lib-jquery.min.js"></script>
 </head>
 <body>
 <div wix-ctrl="appSettings"></div>
@@ -23,7 +23,7 @@
             Please add a short description of your App + CTA for the main action.
         </p>
 
-        <div class="main_button"
+        <div class="main-cta-button"
              wix-ctrl="Button"
              wix-options="{
                     label: 'Main CTA',
@@ -31,6 +31,21 @@
                 }"
              id="main-cta"
         ></div>
+
+        <div class="main-bottom">
+          <hr class="divider-long"/>
+          <p>
+            Upgrade now to get more features and enjoy everything our app has to offer!
+          </p>
+          <div wix-ctrl="Button"
+               wix-options="{
+                      label: 'Upgrade Now',
+                      className: 'btn-upgrade-banner'
+
+                  }"
+                onClick="Wix.Settings.openBillingPage()"
+          ></div>
+      </div>
     </div>
 
     <!--settings tab-->
@@ -218,7 +233,6 @@
                     title: 'Title Font style and color',
                     startWithColor: 'color-5',
                     startWithTheme:'font_4',
-                    infoTitle: 'some info title',
                     infoText: 'some information text should be here'
                 }"
         ></div>
@@ -232,7 +246,6 @@
                     title: 'Description Font style & color',
                     startWithColor: 'color-4',
                     startWithTheme:'font_8',
-                    infoTitle: 'some info title',
                     infoText: 'some information text should be here'
                 }"
         ></div>
@@ -259,21 +272,43 @@
              wix-param-color="_inputColor"
              wix-ctrl="FontAndColorPicker"
              wix-options="{
-                    title: 'Field Font style & color',
-                    startWithColor: 'color-3',
+                    title: 'Input field text font and color',
+                    startWithColor: 'color-1',
                     startWithTheme:'font_8',
-                    infoTitle: 'some info title',
                     infoText: 'some information text should be here'
                 }"
         ></div>
 
         <hr class="divider-long"/>
 
-        <div wix-param="inputFieldBackground"
+        <div wix-param="_inputFieldBackground"
              wix-ctrl="ColorPickerSlider"
              wix-options="{
                     title: 'Input Field Background',
-                    startWithColor: 'color-1'
+                    startWithColor: 'color-4',
+                    startWithOpacity: 1
+                }"
+        ></div>
+
+        <hr class="divider-long"/>
+
+        <div wix-param="_borderColor"
+             wix-ctrl="ColorPickerSlider"
+             wix-options="{
+                    title: 'Border Color',
+                    startWithColor: 'color-2',
+                    startwithOpacity: 1
+                }"
+        ></div>
+
+        <hr class="divider-long"/>
+
+        <div wix-param="_hrColor"
+             wix-ctrl="ColorPickerSlider"
+             wix-options="{
+                    title: 'Divider Color',
+                    startWithColor: 'color-2',
+                    startwithOpacity: 1
                 }"
         ></div>
 
@@ -293,14 +328,13 @@
                     startWithColor: 'color-1',
                     startWithTheme:'font_8',
                     startWithSize:15,
-                    infoTitle: 'some info title',
                     infoText: 'some information text should be here'
                 }"
         ></div>
 
         <hr class="divider-long"/>
 
-        <div wix-param="_btnBgColo"
+        <div wix-param="_btnBgColor"
              wix-ctrl="ColorPickerSlider"
              wix-options="{
                     title: 'Button Background',
@@ -328,7 +362,7 @@
         <hr class="divider-long"/>
 
         <div wix-ctrl="SectionDividerLabeled"
-             wix-options="{label: 'Animation settings', infoText: 'info text', infoTitle: 'info title'}" style="">
+             wix-options="{label: 'Animation settings', infoText: 'info text'}">
         </div>
 
         <hr class="divider-long"/>
@@ -380,11 +414,12 @@
              wix-options="{
                         label: 'Opposite effect',
                         defaultValue: true,
-                        infoTitle: 'some info title',
                         infoText: 'some information text should be here'
                     }"
         ></div>
     </div>
+
+    <hr class="divider-short"/>
 
     <!--Support tab-->
 
@@ -400,27 +435,27 @@
         <ul class="developer-info">
             <li>
                 <div wix-ctrl="Symbol" wix-options="{name: 'email'}"></div>
-                support@wix.com
+                <a href="mailto:support@wix.com">support@wix.com</a>
             </li>
             <li>
                 <div wix-ctrl="Symbol" wix-options="{name: 'globe'}"></div>
-                Developer Website
+                <a href="https://dev.wix.com">Developer Website</a>
             </li>
             <li>
                 <div wix-ctrl="Symbol" wix-options="{name: 'phone'}"></div>
-                1 408 974 4897
+                <a href="tel:1-408-974-4897">1-408-974-4897</a>
             </li>
         </ul>
 
         <hr class="divider-long"/>
 
         <div wix-ctrl="SectionDividerLabeled"
-             wix-options="{label: 'Review the app'}">
+             wix-options="{label: 'Review our app'}">
         </div>
 
         <hr class="divider-long"/>
 
-        <p class="review-paragraph">Have you enjoyed the app? Spread the word and rate us in the app market</p>
+        <p class="review-paragraph">Enjoying <APP NAME>? Leave us a review in the App Market.</p>
 
         <div class="button-wrapper-center">
             <div class="support_rateUs"
@@ -429,6 +464,7 @@
                         label: 'Rate Us',
                         className: 'btn-confirm-primary'
                     }"
+                    onClick="Wix.Settings.openReviewInfo()"
             ></div>
         </div>
 
@@ -443,8 +479,10 @@
         <div class="support_email"
              wix-ctrl="Input"
              wix-options="{
-                    title: 'What\'s your email? (optional)',
-                    placeholder: 'Email'
+                    title: 'What\'s your email?',
+                    placeholder: 'Email',
+                    validateOnBlurOnly: true,
+                    invalidMessage: 'Invalid Email Address'
                 }"
         ></div>
 
@@ -465,19 +503,21 @@
             <div class="support_sendButton"
                  wix-ctrl="Button"
                  wix-options="{
-                        label: 'Send'
+                        label: 'Send',
+                        disabled: true
                     }"
             ></div>
         </div>
     </div>
 
-    <hr class="divider-short"/>
+
 
     <div wix-ctrl="Button"
          wix-options="{
                 className: 'btn-upgrade-nav',
                 label: 'Upgrade'
             }"
+        onClick="Wix.Settings.openBillingPage()"
     ></div>
 </div>
 

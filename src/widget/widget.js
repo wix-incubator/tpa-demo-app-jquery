@@ -32,3 +32,12 @@ function stringify(input) {
         return input;
     }
 }
+
+$(document).ready(() => {
+  $('.navtohome').click(() => {
+    Wix.getSiteMap(pages => {
+      Wix.navigateToPage(pages[0].pageId.substring(1));
+    });
+    console.log('navigated');
+  });
+});
