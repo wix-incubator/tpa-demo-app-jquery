@@ -16,6 +16,7 @@ Wix.addEventListener(Wix.Events.SETTINGS_UPDATED, onSettingsUpdate);
 
 function onSettingsUpdate(update) {
     update = stringify(update);
+    $('.sample-settings-title').show();
     $('.json').html(update);
     updateCompHeight();
 }
