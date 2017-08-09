@@ -16,6 +16,7 @@ Wix.addEventListener(Wix.Events.SETTINGS_UPDATED, onSettingsUpdate);
 
 function onSettingsUpdate(update) {
     update = stringify(update);
+    $('.sample-settings-title').show();
     $('.json').html(update);
     updateCompHeight();
 }
@@ -32,3 +33,12 @@ function stringify(input) {
         return input;
     }
 }
+
+$(document).ready(() => {
+  $('.navtohome').click(() => {
+    Wix.getSiteMap(pages => {
+      Wix.navigateToPage(pages[0].pageId.substring(1));
+    });
+    console.log('navigated');
+  });
+});
