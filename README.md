@@ -28,7 +28,7 @@ Generate the app:
 5. Run the app
 `npm start`
 
-This will run a webserver on your local host. You can now view your app in your browser: http://localhost:5000/
+This will run a webserver on your local host. You can now view your app in your browser: http://localhost:5000/widget.html
 
 ### **Registering the app**
 
