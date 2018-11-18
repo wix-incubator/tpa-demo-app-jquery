@@ -20,7 +20,7 @@ Generate the app:
 1. Clone our starter template
 `git clone git@github.com:wix/tpa-demo-app-jquery.git`
 2. Navigate to your project folder
-`cd tpa-demo-app-react-jquery/`
+`cd tpa-demo-app-jquery/`
 3. Install npm
 `npm install`
 4. Run webpack
