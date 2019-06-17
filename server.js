@@ -6,11 +6,11 @@ new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,
     historyApiFallback: true,
-    https: false //Change this to true when testing on a server
+    https: true //Change this to true when testing on a server
 }).listen(5000, 'localhost', function (err, result) {
     if (err) {
         return console.log(err);
     }
 
-    console.log('Listening at http://localhost:5000/');
+    console.log('Listening at https://localhost:5000/');
 });
